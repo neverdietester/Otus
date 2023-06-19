@@ -4,7 +4,7 @@ namespace Otus
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main(String[] args)
         {
             int n;
             while (true)
@@ -37,7 +37,8 @@ namespace Otus
 
             var tabWidth = (2*n + custom.Length);
             var tabHeight = (1 + 2*n);
-
+            var wordTab = tabWidth - custom.Length - n - 2;
+            
             //слово
             for (int j = 0; j < tabHeight; j++)
             {
@@ -61,12 +62,12 @@ namespace Otus
                 if (j == n)
                 {
                     Console.Write("+");
-                    for (int i = 0; i <= (tabWidth - custom.Length - n - 2); i++)
+                    for (int i = 0; i <= wordTab; i++)
                     {
                         Console.Write(" ");
                     }
                     Console.Write(custom);
-                    for (int i = 0; i <= (tabWidth - custom.Length - n - 2); i++)
+                    for (int i = 0; i <= wordTab; i++)
                     {
                         Console.Write(" ");
                     }
