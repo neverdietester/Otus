@@ -11,63 +11,16 @@ namespace Homework3
         {
             Console.WriteLine("Решение квадартного уравнения a * x^2 + b * x + c = 0");
 
-            //    enum Severity
-            //{
-            //    Warning,
-            //    Error
-            //}
-            
-            int a = 0;
-            int b = 0;
-            int c = 0;
+            string message = "";
+            int a = NumberEntry(message);
+            int b = NumberEntry(message);
+            int c = NumberEntry(message);
 
-            while (true)
-            {
-                Console.WriteLine("Введите число a:");
-                var input = Console.ReadLine();
-                try
-                {
-                    int result = Convert.ToInt32(input);
-                    a = result;
-                    break;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Значение должно быть целым числом");
-                }
-            }
+            Console.WriteLine($"Значение a = {a}");
+            Console.WriteLine($"Значение b = {b}");
+            Console.WriteLine($"Значение c = {c}");
 
-            while (true)
-            {
-                Console.WriteLine("Введите число b:");
-                var input = Console.ReadLine();
-                try
-                {
-                    int result = Convert.ToInt32(input);
-                    b = result;
-                    break;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Значение должно быть целым числом");
-                }
-            }
 
-            while (true)
-            {
-                Console.WriteLine("Введите число c:");
-                var input = Console.ReadLine();
-                try
-                {
-                    int result = Convert.ToInt32(input);
-                    c = result;
-                    break;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Значение должно быть целым числом");
-                }
-            }
             var discriminantInt = (b * b - 4 * a * c);
             double discriminant = Convert.ToDouble(discriminantInt);
             double a1 = Convert.ToDouble(a);
@@ -79,88 +32,99 @@ namespace Homework3
             double x1 = 0;
             double x2 = 0;
 
-            
-           try
-           {
-             if (discriminant > 0)
-             {
+
+            try
+            {
+                if (discriminant > 0)
+                {
                     x1 = ((-b1 + radix) / (2 * a));
                     x2 = ((-b1 - radix) / (2 * a));
                     Console.WriteLine($"Значение x1 =  {x1}");
                     Console.WriteLine($"Значение x2 =  {x2}");
-             }
-           }
-           catch (DivideByZeroException ex)
-           {
-              Console.WriteLine("На ноль делить нельзя");
-           }
-           catch (Exception ex)
-           {
-              Console.WriteLine("Значение дискриминанта отрицательное");
-           }
-            
-            
-           try
-           {
-              if (discriminant < 0)
-              {
+                }
+            }
+            catch (DivideByZeroException ex)
+            {
+                Console.WriteLine("На ноль делить нельзя");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Значение дискриминанта отрицательное");
+            }
+
+
+            try
+            {
+                if (discriminant < 0)
+                {
                     throw new MyException();
-              }
-           }
+                }
+            }
 
-           catch (MyException ex)
-           {
-                    Console.WriteLine("Вещественных значений не найдено");
-           }
+            catch (MyException ex)
+            {
+                FormatData(message, Severity.Warning);
+            }
 
-            
-           try
-           {
-              if (discriminant == 0)
-              {
+
+            try
+            {
+                if (discriminant == 0)
+                {
                     x1 = ((-b1 + radix) / (2 * a));
 
                     Console.WriteLine($"Значение x =  {x1}");
-              }
-           }
-           catch (Exception ex)
-           {
-              Console.WriteLine("Произошла ошибка");
-           }
-        }
-            
-
-            //static void FormatData((string message, Severity severity, IDictionary data))
-            //{
-            //    switch (severity)
-            //    {
-            //        case Severity.Error:
-            //            throw Exception(e);
-            //        case Severity.Warning:
-            //            throw Exception(e);
-            //        default:
-            //            throw new InvalidOperationException($"Непонятная ошибка");
-            //    }
-            //}
-
-            //static void FormatData((string message, Severity severity, IDictionary data))
-            //{
-            //        Console.WriteLine("Введите значение a:");
-            //        double d = 0;
-            //        try
-            //        {
-            //            d = Convert.ToDouble(Console.ReadLine());
-            //        }
-            //        catch (FormatException e)
-            //        {
-            //            Console.WriteLine("Произошла ошибка" + e.Error);
-            //            return;
-            //        }
-            //    }
-            //}
-
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Произошла ошибка");
+            }
         }
 
+    private static int NumberEntry(string message)
+        {
+            while (true)
+            {
+                Console.WriteLine($"Введите число: {message}");
+                var input = Console.ReadLine();
+                try
+                {
+                    int result = Convert.ToInt32(input);
+                    return result;
+                    //break;
+                }
+                catch (Exception ex)
+                {
+                    FormatData(message, Severity.Error);
+                }
+            }
+        }
+
+        static void FormatData(string message, Severity severity)
+        {
+            if (severity == Severity.Error)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.WriteLine("Значение должно быть целым числом");
+                Console.ResetColor();
+            }
+            if (severity == Severity.Warning)
+            {
+                Console.ForegroundColor = ConsoleColor.Black;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Вещественных значений не найдено");
+                Console.ResetColor();
+            }
+        }
+        enum Severity
+        {
+            Error,
+            Warning
+        }
+
+    }
     [Serializable]
     internal class MyException : Exception
     {
