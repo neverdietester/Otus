@@ -15,17 +15,17 @@ namespace homework2
             Stopwatch stopWatch = new Stopwatch();
             
             stopWatch.Start();
-            {
-                var lList = new List<int>();
+            var lList = new List<int>();
                 for (int i = 1; i <= amountOfElements; i++)
                 {
                     lList.Add(i);
                 }
-            }
             stopWatch.Stop();
     
             TimeSpan tsList = stopWatch.Elapsed;
             Console.WriteLine("RunTime List: " + tsList);
+
+            stopWatch.Restart();
 
             //ArrayList
             stopWatch.Start();
@@ -38,6 +38,8 @@ namespace homework2
 
             TimeSpan tsArray = stopWatch.Elapsed;
             Console.WriteLine("RunTime ArrayList: " + tsArray);
+
+            stopWatch.Restart();
 
             //LinkedList
             stopWatch.Start();
