@@ -25,9 +25,9 @@ namespace Homework3
 
             Console.WriteLine($"Дискриминант равен = {discriminantInt}");
             var radix = Math.Sqrt(discriminantInt);
-            double x1 = 0;
-            double x2 = 0;
-
+           
+            double x1;
+            double x2;
 
             try
             {
@@ -104,7 +104,7 @@ namespace Homework3
             {
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.BackgroundColor = ConsoleColor.Yellow;
-                Console.WriteLine(message/*"Вещественных значений не найдено"*/);
+                Console.WriteLine(message);
                 Console.ResetColor();
             }
         }
