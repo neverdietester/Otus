@@ -14,7 +14,7 @@ namespace Homework4
             Console.WriteLine($"size = {s.Size}, Top = '{s.Top}'");
             s.Pop();
             // Извлек верхний элемент 'c' Size = 2
-            Console.WriteLine($"Извлек верхний элемент '{9}' Size = {s.Size}");
+            Console.WriteLine($"Извлек верхний элемент, Size = {s.Size}");
             s.Add("d");
             // size = 3, Top = 'd'
             Console.WriteLine($"size = {s.Size}, Top = '{s.Top}'");
@@ -24,9 +24,7 @@ namespace Homework4
             // size = 0, Top = null
             Console.WriteLine($"size = {s.Size}, Top = {(s.Top == null ? "null" : s.Top)}");
             s.Pop();
-
         }
-
 
         class Stack
         {
@@ -35,7 +33,6 @@ namespace Homework4
             public Stack(params string[] input)
             {
                 lines = input.ToList();
-                
             }
 
             public void Add(string backstitch)
@@ -55,7 +52,7 @@ namespace Homework4
                 }
                 catch (IndexOutOfRangeException)
                 {
-                    throw new Exception ("Стек пустой");
+                    throw new Exception("Стек пустой");
                 }
             }
 
@@ -70,10 +67,9 @@ namespace Homework4
                         return null;
                     }
                     var lastItem = lines.Last();
-                    Console.WriteLine(lastItem);
                     return lastItem;
                 }
             }
         }
     }
- }
+}
