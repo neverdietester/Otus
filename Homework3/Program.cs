@@ -21,82 +21,72 @@ namespace Homework3
             Console.WriteLine($"Значение c = {c}");
 
 
-            var discriminantInt = (b * b - 4 * a * c);
-            double discriminant = Convert.ToDouble(discriminantInt);
-            double a1 = Convert.ToDouble(a);
-            double b1 = Convert.ToDouble(b);
-            double c1 = Convert.ToDouble(c);
+            var discriminantInt = (double)(b * b - 4 * a * c);
 
             Console.WriteLine($"Дискриминант равен = {discriminantInt}");
-            var radix = Math.Sqrt(discriminant);
+            var radix = Math.Sqrt(discriminantInt);
             double x1 = 0;
             double x2 = 0;
 
 
             try
             {
-                if (discriminant > 0)
+                if (discriminantInt > 0)
                 {
-                    x1 = ((-b1 + radix) / (2 * a));
-                    x2 = ((-b1 - radix) / (2 * a));
+                    x1 = (-b + radix) / (2 * a);
+                    x2 = (-b - radix) / (2 * a);
                     Console.WriteLine($"Значение x1 =  {x1}");
                     Console.WriteLine($"Значение x2 =  {x2}");
                 }
             }
-            catch (DivideByZeroException ex)
+            catch (DivideByZeroException)
             {
                 Console.WriteLine("На ноль делить нельзя");
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Значение дискриминанта отрицательное");
-            }
 
 
             try
             {
-                if (discriminant < 0)
+                if (discriminantInt < 0)
                 {
-                    throw new MyException();
+                    throw new CalculatioтError("Вещественных значений не найдено");
                 }
             }
 
-            catch (MyException ex)
+            catch (CalculatioтError ex)
             {
-                FormatData(message, Severity.Warning);
+                FormatData(ex.Message, Severity.Warning);
             }
-
 
             try
             {
-                if (discriminant == 0)
+                if (discriminantInt == 0)
                 {
-                    x1 = ((-b1 + radix) / (2 * a));
+                    x1 = ((-b + radix) / (2 * a));
 
                     Console.WriteLine($"Значение x =  {x1}");
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine("Произошла ошибка");
+                Console.WriteLine("Произошла непредвиденная ошибка");
             }
         }
 
-    private static int NumberEntry(string message)
+    private static int NumberEntry(string numeric)
         {
             while (true)
             {
-                Console.WriteLine($"Введите число: {message}");
+                Console.WriteLine($"Введите число: {numeric}");
                 var input = Console.ReadLine();
                 try
                 {
                     int result = Convert.ToInt32(input);
                     return result;
-                    //break;
                 }
-                catch (Exception ex)
+                catch (System.FormatException ex)
                 {
-                    FormatData(message, Severity.Error);
+                    FormatData(ex.Message, Severity.Error);
                 }
             }
         }
@@ -107,14 +97,14 @@ namespace Homework3
             {
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.BackgroundColor = ConsoleColor.Red;
-                Console.WriteLine("Значение должно быть целым числом");
+                Console.WriteLine(message);
                 Console.ResetColor();
             }
             if (severity == Severity.Warning)
             {
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.BackgroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("Вещественных значений не найдено");
+                Console.WriteLine(message/*"Вещественных значений не найдено"*/);
                 Console.ResetColor();
             }
         }
@@ -126,28 +116,22 @@ namespace Homework3
 
     }
     [Serializable]
-    internal class MyException : Exception
+    internal class CalculatioтError : Exception
     {
-        private object ex;
 
-        public MyException()
+        public CalculatioтError()
         {
         }
 
-        public MyException(object ex)
-        {
-            this.ex = ex;
-        }
-
-        public MyException(string message) : base(message)
+        public CalculatioтError(string message) : base(message)
         {
         }
 
-        public MyException(string message, Exception innerException) : base(message, innerException)
+        public CalculatioтError(string message, Exception innerException) : base(message, innerException)
         {
         }
 
-        protected MyException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected CalculatioтError(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }
