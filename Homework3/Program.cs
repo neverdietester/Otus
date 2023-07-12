@@ -24,26 +24,34 @@ namespace Homework3
             var discriminantInt = (double)(b * b - 4 * a * c);
 
             Console.WriteLine($"Дискриминант равен = {discriminantInt}");
+            Console.WriteLine();
             var radix = Math.Sqrt(discriminantInt);
            
             double x1;
             double x2;
+            double d = 2 * a;
+
+
 
             try
             {
                 if (discriminantInt > 0)
                 {
-                    x1 = (-b + radix) / (2 * a);
-                    x2 = (-b - radix) / (2 * a);
+                    if (d == 0) throw new DivideByZeroException();
+                    x1 = (-b + radix) / (d);
+                    x2 = (-b - radix) / (d);
                     Console.WriteLine($"Значение x1 =  {x1}");
                     Console.WriteLine($"Значение x2 =  {x2}");
                 }
             }
-            catch (DivideByZeroException)
-            {
-                Console.WriteLine("На ноль делить нельзя");
-            }
 
+            catch (DivideByZeroException ex)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                Console.WriteLine($"! При рассчете вещественных значений произошла ошибка: На ноль делить нельзя!: {ex.Message}");
+                Console.ResetColor();
+            }
 
             try
             {
@@ -67,9 +75,9 @@ namespace Homework3
                     Console.WriteLine($"Значение x =  {x1}");
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                Console.WriteLine("Произошла непредвиденная ошибка");
+                Console.WriteLine($"Произошла непредвиденная ошибка:{ ex.Message}");
             }
         }
 
@@ -86,7 +94,7 @@ namespace Homework3
                 }
                 catch (System.FormatException ex)
                 {
-                    FormatData(ex.Message, Severity.Error);
+                    FormatData($"Значение числа должно быть целым!:{ex.Message}", Severity.Error);
                 }
             }
         }
