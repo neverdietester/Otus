@@ -10,42 +10,46 @@ namespace Homework_8
         {
             Console.WriteLine("Enter salary. Enter an empty string for finish.");
             Node root = null;
-            Node data = null;
-
 
             while (true)
             {
-                var employee_data = new EmployeeData();
-                var _line = Console.ReadLine();
+                var employee_data = new Node();
+                Console.WriteLine("Enter employee name:");
+                var line = Console.ReadLine();
 
-                employee_data.Name = _line;
+                employee_data.Name = line;
 
                 if (string.IsNullOrWhiteSpace(employee_data.Name))
                 {
                     break;
                 }
 
-                data = new Node()
+                Console.WriteLine("Enter employee salary:");
+                var sum = Console.ReadLine();
+                if (int.TryParse(sum, out var salary))
                 {
-                    Data = employee_data.Name
-                };
-                var _sum = Console.ReadLine();
-                employee_data.Salary = Convert.ToInt32(_sum);
+                    employee_data.Salary = salary;
+                }
+                else
+                {
+                    Console.WriteLine("The entered number is not an integer.");
+                    continue;
+                }
 
                 if (root == null)
                 {
                     root = new Node()
                     {
-                        Value = employee_data.Salary,
-                        Data = employee_data.Name
+                        Salary = employee_data.Salary,
+                        Name = employee_data.Name
                     };
                 }
                 else
                 {
-                    AddNode(root, new Node
+                    root.AddNode(root, new Node
                     {
-                        Value = employee_data.Salary,
-                        Data = employee_data.Name
+                        Salary = employee_data.Salary,
+                        Name = employee_data.Name
 
 
                     }); ;
@@ -53,92 +57,35 @@ namespace Homework_8
             }
 
             Console.WriteLine("Sorted numbers:");
-            Traverse(root, data);
+            root.Traverse(root);
 
-            Console.WriteLine("What number to find?  Use 0 for finish.");
             while (true)
-            {
-                var line = Console.ReadLine();
-                var element = Convert.ToInt32(line);
-                if (element == 0)
-                {
-                    break;
-                }
-                var (node, level) = FindNode(root, element, level: 1);
-                if (node == null)
-                {
-                    Console.WriteLine("Not found.");
-                }
-                else
-                {
-                    Console.WriteLine($"Find {node.Value}, level: {level}");
-                }
-            }
 
-            static void AddNode(Node root, Node toAdd)
             {
-                if (toAdd.Value < root.Value)
+                Console.WriteLine("What number to find?  Use 0 for finish.");
+                try
                 {
-                    //Идем в левое поддерево
-                    if (root.Left != null)
+                    var line = Console.ReadLine();
+
+                    var element = Convert.ToInt32(line);
+
+                    if (element == 0)
                     {
-                        AddNode(root.Left, toAdd);
+                        break;
+                    }
+                    var (node, level) = root.FindNode(root, element, level: 1);
+                    if (node == null)
+                    {
+                        Console.WriteLine("Not found.");
                     }
                     else
                     {
-                        root.Left = toAdd;
+                        Console.WriteLine($"Find {node.Salary}");
                     }
                 }
-                else
+                catch (System.FormatException ex)
                 {
-                    //Идем в правое поддерево
-                    if (root.Right != null)
-                    {
-                        AddNode(root.Right, toAdd);
-                    }
-                    else
-                    {
-                        root.Right = toAdd;
-                    }
-                }
-            }
-
-            static (Node node, int level) FindNode(Node root, int number, int level)
-            {
-                if (number < root.Value)
-                {
-                    //ищем в левом поддереве
-                    if (root.Left != null)
-                    {
-                        return FindNode(root.Left, number, level + 1);
-                    }
-                    return (null, -1);
-                }
-                if (number > root.Value)
-                {
-                    //ищем в правом поддереве
-                    if (root.Right != null)
-                    {
-                        return FindNode(root.Right, number, level + 1);
-                    }
-                    return (null, -1);
-                }
-                return (root, level);
-            }
-
-            static void Traverse(Node originiNode, Node data)
-            {
-                if (originiNode.Left != null)
-                {
-                    Traverse(originiNode.Left,data);
-                }
-
-                Console.WriteLine(originiNode.Value);
-                Console.WriteLine(data.Data);
-
-                if (originiNode.Right != null)
-                {
-                    Traverse(originiNode.Right,data);
+                    Console.WriteLine($"The string must not be empty: {ex.Message}");
                 }
             }
         }
