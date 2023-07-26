@@ -10,9 +10,9 @@ namespace Homework_5
     {
         string GetInfo();
         List<string> GetComponents();
-        void GetRobotType() 
-        { 
-            Console.WriteLine("I am a simple robot");
+        public string GetRobotType() 
+        {
+            return "I am a simple robot";
         }
     }
 }

@@ -9,6 +9,8 @@ namespace Homework_5
 {
     class Quadcopter : IFlyingRobot, IChargeable
     {
+        private List<string> _components;
+
         public void Charge()
         {
             Console.WriteLine("Charging...");
@@ -23,8 +25,8 @@ namespace Homework_5
 
         List<string> IRobot.GetComponents()
         {
-            _ = new List<string> { "rotor1", "rotor2", "rotor3", "rotor4" };
-            throw new NotImplementedException();
+            _components = new List<string> { "rotor1", "rotor2", "rotor3", "rotor4" };
+            return _components;
         }
 
         string IRobot.GetInfo()
@@ -32,10 +34,8 @@ namespace Homework_5
             throw new NotImplementedException();
         }
 
-        void IFlyingRobot.GetRobotType()
-        {
-            throw new NotImplementedException();
-        }
+        string IFlyingRobot.GetRobotType()
+        { return default; }
     }
 }
  

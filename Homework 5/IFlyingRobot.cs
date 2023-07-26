@@ -8,7 +8,10 @@ namespace Homework_5
 {
     interface IFlyingRobot : IRobot
     {
-        new void GetRobotType();
+        public new string GetRobotType()
+        {
+            return "I am a simple robot";
+        }
     }
 }
  
