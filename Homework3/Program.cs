@@ -12,9 +12,9 @@ namespace Homework3
             Console.WriteLine("Решение квадартного уравнения a * x^2 + b * x + c = 0");
 
             string message = "";
-            int a = NumberEntry(message);
-            int b = NumberEntry(message);
-            int c = NumberEntry(message);
+            var a = NumberEntry(message);
+            var b = NumberEntry(message);
+            var c = NumberEntry(message);
 
             Console.WriteLine($"Значение a = {a}");
             Console.WriteLine($"Значение b = {b}");
@@ -31,20 +31,17 @@ namespace Homework3
             double x2;
             double d = 2 * a;
 
-
-
             try
             {
                 if (discriminantInt > 0)
                 {
                     if (d == 0) throw new DivideByZeroException();
-                    x1 = (-b + radix) / (d);
-                    x2 = (-b - radix) / (d);
+                    x1 = (-b + radix) / d;
+                    x2 = (-b - radix) / d;
                     Console.WriteLine($"Значение x1 =  {x1}");
                     Console.WriteLine($"Значение x2 =  {x2}");
                 }
             }
-
             catch (DivideByZeroException ex)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -52,32 +49,18 @@ namespace Homework3
                 Console.WriteLine($"! При рассчете вещественных значений произошла ошибка: На ноль делить нельзя!: {ex.Message}");
                 Console.ResetColor();
             }
-
-            try
-            {
-                if (discriminantInt < 0)
-                {
-                    throw new CalculatioтError("Вещественных значений не найдено");
-                }
-            }
-
             catch (CalculatioтError ex)
             {
                 FormatData(ex.Message, Severity.Warning);
             }
-
-            try
+            catch
             {
                 if (discriminantInt == 0)
                 {
-                    x1 = ((-b + radix) / (2 * a));
+                    x1 = (-b + radix) / (2 * a);
 
                     Console.WriteLine($"Значение x =  {x1}");
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Произошла непредвиденная ошибка:{ ex.Message}");
             }
         }
 
@@ -123,7 +106,6 @@ namespace Homework3
         }
 
     }
-    [Serializable]
     internal class CalculatioтError : Exception
     {
 
