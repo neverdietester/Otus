@@ -41,7 +41,22 @@ namespace Homework3
                     Console.WriteLine($"Значение x1 =  {x1}");
                     Console.WriteLine($"Значение x2 =  {x2}");
                 }
+                if (discriminantInt == 0)
+                {
+                    x1 = (-b + radix) / (2 * a);
+
+                    Console.WriteLine($"Значение x =  {x1}");
+                }
+                if (discriminantInt < 0)
+                {
+                    throw new CalculatioтError();
+                }
             }
+            catch (CalculatioтError ex)
+            {
+                FormatData($"Вещественных значений не найдено! Ошибка:{ ex.Message}", Severity.Warning);
+            }
+
             catch (DivideByZeroException ex)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -49,19 +64,7 @@ namespace Homework3
                 Console.WriteLine($"! При рассчете вещественных значений произошла ошибка: На ноль делить нельзя!: {ex.Message}");
                 Console.ResetColor();
             }
-            catch (CalculatioтError ex)
-            {
-                FormatData(ex.Message, Severity.Warning);
-            }
-            catch
-            {
-                if (discriminantInt == 0)
-                {
-                    x1 = (-b + radix) / (2 * a);
-
-                    Console.WriteLine($"Значение x =  {x1}");
-                }
-            }
+           
         }
 
     private static int NumberEntry(string numeric)
