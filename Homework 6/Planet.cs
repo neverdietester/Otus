@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Homework_6
 {
-    public class Planeta
+    public class Planet
     {
-        public Planeta(string name, int serialNumber, int lengthOfEquator, string previousPlanet)
+        public Planet(string name, int serialNumber, int lengthOfEquator, Planet previousPlanet)
         {
             Name = name;
             SerialNumber = serialNumber;
@@ -17,9 +17,9 @@ namespace Homework_6
         }
 
         public string Name { get; }
-        public int SerialNumber { get; }
+        public  int SerialNumber { get; }
         public int LengthOfEquator { get; }
-        public string PreviousPlanet { get; }
+        public Planet PreviousPlanet { get; }
 
     }
 }
