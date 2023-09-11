@@ -40,17 +40,20 @@ namespace Homework_6
             Console.WriteLine($"Solar system object:{Planeta3}");
             Console.WriteLine($"{Planeta1.Name} & {Planeta3.Name} : {Planeta2.Equals(Planeta1)}");
             
+            Console.WriteLine();
             Console.WriteLine("Программа 2");
             
 
-            PlanetList FindPlanet = new PlanetList();
-            var result = FindPlanet.GetPlanet("name");
-            FindPlanet.GetPlanet("Earth");
-            Console.WriteLine($"Вывод:{result}");
-            FindPlanet.GetPlanet("Limoniya");
-            FindPlanet.GetPlanet("Mars");
+            PlanetList findPlanet = new PlanetList();
+            findPlanet.GetPlanet("Earth");
+            findPlanet.GetPlanet("Limoniya");
+            findPlanet.GetPlanet("Mars");
 
-            
+            Console.WriteLine();
+            Console.WriteLine("Программа 3");
+
+
+
 
         }
     }

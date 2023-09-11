@@ -30,7 +30,7 @@ namespace Homework_6
             {
                 if (name == planet.Name)
                 {
-                    Console.WriteLine($"Планета есть в списке: {name}");
+                    Console.WriteLine($"Планета есть в списке: Имя: {planet.Name}, Порядковый номер: {planet.SerialNumber}, Длина экватора: {planet.LengthOfEquator}");
                     return (planet.SerialNumber, planet.LengthOfEquator, null);
                 }
             }
