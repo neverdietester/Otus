@@ -17,20 +17,17 @@ namespace Homework_9
         public event ImageStarted onImageStarted;
         public event ImageCompleted onImageCompleted;
 
-        public void Download()
+        public async Task Download()
         {
-            // Откуда будем качать
-            string remoteUri = "https://stsci-opo.org/STScI-01H7TESNNSX9CH4EQ29C919C4M.png";
-            // Как назовем файл на диске
+            Uri remoteUri = new Uri("https://stsci-opo.org/STScI-01H7TG7ZX0PHJ2F5S7P4ND2DT0.png");
             string fileName = "bigimage.png";
 
-            // Качаем картинку в текущую директорию
             var myWebClient = new WebClient();
+      
             onImageStarted?.Invoke();
-
+            myWebClient.DownloadFileAsync(remoteUri, fileName);
             Console.WriteLine("Качаю \"{0}\" из \"{1}\" .......\n\n", fileName, remoteUri);
-
-            myWebClient.DownloadFile(remoteUri, fileName);
+            
             onImageCompleted?.Invoke();
         }
     }

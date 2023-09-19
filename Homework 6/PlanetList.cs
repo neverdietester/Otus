@@ -37,5 +37,30 @@ namespace Homework_6
             Console.WriteLine($"Планета отсутствует в списке:{name}");
             return (-1,-1,"error");
         }
+
+        public (int serialNumber, int lengthOfEquator, string? error) GetPlanetTwo(string name, Func<string,string> func)
+        {
+            if (func is null)
+            {
+                throw ArgumentNullException(nameof(func));
+            }
+
+            foreach (var planet in Planets)
+            {
+                if (name == func(name))
+                {
+                    Console.WriteLine($"Планета есть в списке: Имя: {planet.Name}, Порядковый номер: {planet.SerialNumber}, Длина экватора: {planet.LengthOfEquator}");
+                    return (planet.SerialNumber, planet.LengthOfEquator, null);
+                }
+            }
+            Console.WriteLine($"Планета отсутствует в списке:{name}");
+            return (-1, -1, "error");
+        }
+
+
+        private Exception ArgumentNullException(string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

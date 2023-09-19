@@ -1,10 +1,12 @@
 ﻿
 
+using System.Threading.Channels;
+using System.Threading.Tasks;
 using Homework_9;
 
 class Program
 {
-    public static void Main()
+    static void Main()
     {
         void SubscribeStart()
         {
@@ -18,11 +20,19 @@ class Program
         ImageDownloud imageDownloud = new ImageDownloud();
         imageDownloud.onImageStarted += SubscribeStart;
         imageDownloud.onImageCompleted += SubscribeStop;
-        imageDownloud.Download();
-       
+        var task = imageDownloud.Download();
 
-        Console.WriteLine("Нажмите любую клавишу");
-        Console.ReadLine();
 
+        Console.WriteLine("Нажмите клавишу А для выхода или любую другую клавишу для проверки статуса скачивания\" ");
+        var key = Console.ReadKey().Key;
+        Console.WriteLine();
+        if (char.ToUpperInvariant((char)key) == 'A')
+        {
+            Environment.Exit(0);
+        }
+        else
+        {
+           Console.WriteLine($"State: {task.IsCompleted}");
+        }
     }
 }

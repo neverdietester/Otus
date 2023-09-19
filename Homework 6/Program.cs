@@ -52,6 +52,7 @@ namespace Homework_6
             Console.WriteLine();
             Console.WriteLine("Программа 3");
 
+            findPlanet.GetPlanetTwo("Earth",);
 
 
 
