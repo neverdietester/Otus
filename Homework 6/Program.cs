@@ -50,12 +50,9 @@ namespace Homework_6
             findPlanet.GetPlanet("Mars");
 
             Console.WriteLine();
+
+
             Console.WriteLine("Программа 3");
-
-            findPlanet.GetPlanetTwo("Earth");
-
-
-
         }
     }
 }
