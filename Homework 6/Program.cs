@@ -48,11 +48,10 @@ namespace Homework_6
             findPlanet.GetPlanet("Earth");
             findPlanet.GetPlanet("Limoniya");
             findPlanet.GetPlanet("Mars");
+            findPlanet.GetPlanet("Limoniya");
+            findPlanet.GetPlanet("Mars");
 
             Console.WriteLine();
-
-
-            Console.WriteLine("Программа 3");
         }
     }
 }
