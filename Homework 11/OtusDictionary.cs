@@ -49,19 +49,11 @@ namespace Homework_11
 
         public string Get(int key)
         {
-            int index = GetIndex(key);
+            var result = entries.FirstOrDefault(t => t is not null && t.key == key);
+            if (result == null)
+                throw new Argument.Exception();
+            return result.Value;
 
-            while (entries[index] != null)
-            {
-                if (entries[index].Key == key)
-                {
-                    return entries[index].Value;
-                }
-
-                index = (index + 1) % entries.Length;
-            }
-
-            return null;
         }
 
         private void Resize()

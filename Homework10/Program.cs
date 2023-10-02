@@ -20,7 +20,7 @@ for (int i = 1; i <= 10; i++)
     
     if (!exist)
     {
-        using (var stream = File.CreateText(Path.Combine(pathTestDir1, fileName)))
+        using var stream = File.CreateText(Path.Combine(pathTestDir1, fileName));
         {
             Encoding utf8 = Encoding.UTF8;
             byte[] fileNameBytes = Encoding.UTF8.GetBytes(fileName);
@@ -31,7 +31,7 @@ for (int i = 1; i <= 10; i++)
     string date = DateTime.Now.ToString();
     File.AppendAllText(Path.Combine(pathTestDir1, fileName), date);
 
-    using (var stream = File.OpenText(Path.Combine(pathTestDir1, fileName)))
+    using var stream = File.OpenText(Path.Combine(pathTestDir1, fileName));
     {
         Console.WriteLine($"Name:{fileName}");
         Console.WriteLine();
