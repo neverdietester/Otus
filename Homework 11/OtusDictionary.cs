@@ -18,7 +18,7 @@ namespace Homework_11
             size = 0;
         }
 
-        public void Add(int key, string value)
+        public void Add(int key, string? value)
         {
             if (value == null)
             {
@@ -44,16 +44,17 @@ namespace Homework_11
                 int newIndex = FindNextIndex(index);
                 entries[newIndex] = new Entry(key, value);
                 size++;
+                Console.WriteLine($"Для {value} присвоился новый ключ: { newIndex}");
             }
         }
 
         public string Get(int key)
         {
-            var result = entries.FirstOrDefault(t => t is not null && t.key == key);
-            if (result == null)
-                throw new Argument.Exception();
-            return result.Value;
+            var result = entries.FirstOrDefault(t => t is not null && t.Key == key);
 
+            if (result == null)
+                throw new ArgumentNullException ("Искомый ключ не найден");
+            return result.Value;
         }
 
         private void Resize()
@@ -68,7 +69,6 @@ namespace Homework_11
                     newEntries[newIndex] = entry;
                 }
             }
-
             entries = newEntries;
         }
 

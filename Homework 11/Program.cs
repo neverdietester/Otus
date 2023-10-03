@@ -1,16 +1,28 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-using Homework_11;
+namespace Homework_11
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
 
-Console.WriteLine("Hello, World!");
+            Console.WriteLine("Собери свой словарь");
+            Console.WriteLine();
 
-OtusDictionary otusDictionary = new OtusDictionary();
+            OtusDictionary otusDictionary = new OtusDictionary();
 
-otusDictionary.Add(1, "Olga");
-otusDictionary.Add(2, "Ol");
-otusDictionary.Add(3, "Vollga");
-otusDictionary.Add(3, "Vol");
+            otusDictionary.Add(3, "Vollga");
+            otusDictionary.Add(2, "Vol");
+            otusDictionary.Add(3, "Vol");
 
-var result = otusDictionary.Get(4);
+            var result = otusDictionary.Get(2);
 
-Console.WriteLine(result);
+            Console.WriteLine($"Найдено значение: {result}");
+        }
+    }
+}
