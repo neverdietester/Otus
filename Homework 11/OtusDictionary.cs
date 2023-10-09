@@ -9,7 +9,7 @@ namespace Homework_11
     public class OtusDictionary
     {
         private const int InitialCapacity = 32;
-        private Entry[] entries;
+        private Entry?[] entries;
         private int size;
 
         public OtusDictionary()
