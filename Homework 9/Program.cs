@@ -8,31 +8,33 @@ class Program
 {
     static void Main()
     {
-        void SubscribeStart()
+        var downloader = new ImageDownloader();
+        downloader.ImageStarted += (sender, e) =>
         {
             Console.WriteLine("Скачивание файла началось");
-        }
-        void SubscribeStop()
+        };
+        downloader.ImageCompleted += (sender, e) =>
         {
             Console.WriteLine("Скачивание файла закончилось");
-        }
+        };
 
-        ImageDownloud imageDownloud = new ImageDownloud();
-        imageDownloud.onImageStarted += SubscribeStart;
-        imageDownloud.onImageCompleted += SubscribeStop;
-        var task = imageDownloud.Download();
+        string remoteUri = "https://stsci-opo.org/STScI-01H7TER35PBNVGAV23W63WE2GX.png";
+        string fileName = "bigimage.png";
 
+        Console.WriteLine("Качаю \"{0}\" из \"{1}\" .......\n\n", fileName, remoteUri);
 
-        Console.WriteLine("Нажмите клавишу А для выхода или любую другую клавишу для проверки статуса скачивания\" ");
-        var key = Console.ReadKey().Key;
-        Console.WriteLine();
-        if (char.ToUpperInvariant((char)key) == 'A')
+        var downloadTask = downloader.Download(remoteUri, fileName);
+
+        Console.WriteLine("Нажмите клавишу A для выхода или любую другую клавишу для проверки статуса скачивания");
+        if (Console.ReadKey().Key == ConsoleKey.A)
         {
-            Environment.Exit(0);
+            return;
         }
-        else
-        {
-           Console.WriteLine($"State: {task.IsCompleted}");
-        }
+
+        bool isCompleted = downloadTask.IsCompleted;
+        Console.WriteLine("Статус скачивания: {0}", isCompleted);
+
+        Console.WriteLine("Нажмите любую клавишу для выхода");
+        Console.ReadKey();
     }
 }

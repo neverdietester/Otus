@@ -14,21 +14,36 @@ namespace Homework_9
         public delegate void ImageStarted();
         public delegate void ImageCompleted();
 
-        public event ImageStarted onImageStarted;
+        public event ImageStarted? onImageStarted;
         public event ImageCompleted onImageCompleted;
 
-        public async Task Download()
+        public async Task<bool> Download(string remoteUri, string fileName)
         {
-            Uri remoteUri = new Uri("https://stsci-opo.org/STScI-01H7TG7ZX0PHJ2F5S7P4ND2DT0.png");
-            string fileName = "bigimage.png";
+            try
+            {
+                OnImageStarted();
 
-            var myWebClient = new WebClient();
-      
-            onImageStarted?.Invoke();
-            myWebClient.DownloadFileAsync(remoteUri, fileName);
-            Console.WriteLine("Качаю \"{0}\" из \"{1}\" .......\n\n", fileName, remoteUri);
-            
-            onImageCompleted?.Invoke();
+                using (var myWebClient = new WebClient())
+                {
+                    await myWebClient.DownloadFileTaskAsync(remoteUri, fileName);
+                }
+
+                OnImageCompleted();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        protected virtual void OnImageStarted()
+        {
+            ImageStarted?.Invoke(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnImageCompleted()
+        {
+            ImageCompleted?.Invoke(this, EventArgs.Empty);
         }
     }
 }
