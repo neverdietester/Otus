@@ -8,12 +8,11 @@ class Program
 {
     static void Main()
     {
-        var downloader = new ImageDownloader();
-        downloader.ImageStarted += (sender, e) =>
+        downloader.onImageStarted += () =>
         {
             Console.WriteLine("Скачивание файла началось");
         };
-        downloader.ImageCompleted += (sender, e) =>
+        downloader.onImageCompleted += () =>
         {
             Console.WriteLine("Скачивание файла закончилось");
         };

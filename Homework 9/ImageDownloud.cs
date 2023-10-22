@@ -15,7 +15,7 @@ namespace Homework_9
         public delegate void ImageCompleted();
 
         public event ImageStarted? onImageStarted;
-        public event ImageCompleted onImageCompleted;
+        public event ImageCompleted? onImageCompleted;
 
         public async Task<bool> Download(string remoteUri, string fileName)
         {
@@ -38,12 +38,12 @@ namespace Homework_9
         }
         protected virtual void OnImageStarted()
         {
-            ImageStarted?.Invoke(this, EventArgs.Empty);
+            ImageStarted?.Invoke();
         }
 
         protected virtual void OnImageCompleted()
         {
-            ImageCompleted?.Invoke(this, EventArgs.Empty);
+            ImageCompleted?.Invoke();
         }
     }
 }
