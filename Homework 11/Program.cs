@@ -17,10 +17,10 @@ namespace Homework_11
             OtusDictionary otusDictionary = new OtusDictionary();
 
             otusDictionary.Add(3, "Vollga");
-            otusDictionary.Add(2, "Vol");
-            otusDictionary.Add(3, "Vol");
+            otusDictionary.Add(4, "Vol");
+            otusDictionary.Add(5, "Vol");
 
-            var result = otusDictionary.Get(2);
+            var result = otusDictionary.Get(5);
 
             Console.WriteLine($"Найдено значение: {result}");
         }

@@ -40,11 +40,7 @@ namespace Homework_11
             }
             else
             {
-                // Коллизия, ищем новый индекс
-                int newIndex = FindNextIndex(index);
-                entries[newIndex] = new Entry(key, value);
-                size++;
-                Console.WriteLine($"Для {value} присвоился новый ключ: { newIndex}");
+                throw new ArgumentNullException("Такой ключ уже есть в словаре");
             }
         }
 
@@ -80,16 +76,6 @@ namespace Homework_11
         private int GetIndex(int key, int length)
         {
             return Math.Abs(key) % length;
-        }
-
-        private int FindNextIndex(int index)
-        {
-            do
-            {
-                index = (index + 1) % entries.Length;
-            } while (entries[index] != null);
-
-            return index;
         }
     }
 }
